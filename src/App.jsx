@@ -1,16 +1,17 @@
 import BookCreate from "./components/BookCreate";
 import BookList from "./components/BookList";
+
+import { postRequest, getRequest } from "./model";
 import { useState } from "react";
 
 function App() {
   const [booksList, setBooksList] = useState([]);
 
   //Creating a function to create a new book from the books array to be passed down as prop -> bookCreate
-  const createBook = (title) => {
-    setBooksList([
-      ...booksList,
-      { id: Math.floor(Math.random() * 9999), title },
-    ]);
+  const createBook = async (title) => {
+    const postResponse = await postRequest(title);
+    const getResponse = await getRequest();
+    setBooksList(getResponse.data);
   };
 
   //Creating a function to delete a book from the books array to be passed down as prop -> BookList -> Bookshow
