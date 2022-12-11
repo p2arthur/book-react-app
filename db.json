@@ -1,11 +1,7 @@
 {
   "books": [
     {
-      "title": "Mad Max",
-      "id": 1
-    },
-    {
-      "title": "Harry Potter",
+      "title": "Harry Potter 2",
       "id": 2
     },
     {
@@ -13,12 +9,16 @@
       "id": 3
     },
     {
-      "title": "Mad Max",
+      "title": "Mad Max 23",
       "id": 4
     },
     {
-      "title": "How to get away with murder",
+      "title": "How to get away with murder 2 3",
       "id": 5
+    },
+    {
+      "title": "The power of habit",
+      "id": 6
     }
   ]
 }

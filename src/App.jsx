@@ -1,30 +1,38 @@
 import BookCreate from "./components/BookCreate";
 import BookList from "./components/BookList";
 
-import { postRequest, getRequest } from "./model";
-import { useState } from "react";
+import * as model from "./model";
+import { useState, useEffect } from "react";
 
 function App() {
   const [booksList, setBooksList] = useState([]);
 
+  const fetchBooks = async () => {
+    const getBooksResponse = await model.getBooksRequest();
+    setBooksList(getBooksResponse.data);
+  };
+
+  useEffect(() => {
+    fetchBooks();
+  }, []);
+
   //Creating a function to create a new book from the books array to be passed down as prop -> bookCreate
   const createBook = async (title) => {
-    const postResponse = await postRequest(title);
-    const getResponse = await getRequest();
-    setBooksList(getResponse.data);
+    const postResponse = await model.postBookRequest(title);
   };
 
   //Creating a function to delete a book from the books array to be passed down as prop -> BookList -> Bookshow
-  const deleteBookById = (id) => {
+  const deleteBookById = async (id) => {
+    await model.deleteBookRequest(id);
     setBooksList(booksList.filter((book) => book.id !== id));
   };
 
   //Creating a function to edit a book from the books array to be passed down as prop -> BookList -> Bookshow
-  const editBookById = (id, newTitle) => {
+  const editBookById = async (id, newTitle) => {
+    const { data } = await model.putBookRequest(id, newTitle);
+
     setBooksList(
-      booksList.map((book) =>
-        book.id === id ? { ...book, title: newTitle } : book
-      )
+      booksList.map((book) => (book.id === id ? { ...book, ...data } : book))
     );
   };
 
