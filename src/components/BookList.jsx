@@ -2,24 +2,15 @@ import BookShow from "./BookShow";
 import { useContext } from "react";
 import BooksContext from "../context/books";
 
-function BookList({ books, onDelete, onEdit }) {
-  const { count, incrementCount } = useContext(BooksContext);
+function BookList() {
+  //Importing the books array from the context
+  const { booksList } = useContext(BooksContext);
 
-  const renderedBooks = books.map((book) => (
-    <BookShow onEdit={onEdit} onDelete={onDelete} key={book.id} book={book} />
+  const renderedBooks = booksList.map((book) => (
+    <BookShow key={book.id} book={book} />
   ));
 
-  const handleCountClick = () => incrementCount();
-
-  return (
-    <div>
-      {count}
-      <button onClick={handleCountClick}>
-        Click me to increment the count
-      </button>
-      <div className="book-list">{renderedBooks}</div>
-    </div>
-  );
+  return <div className="book-list">{renderedBooks}</div>;
 }
 
 export default BookList;
