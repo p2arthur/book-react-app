@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useCallback } from "react";
 import * as model from "../model";
 
 //Creating a Book context
@@ -9,10 +9,10 @@ function Provider({ children }) {
   //Setting a state into the context provider to rerender the app everytime it changes arround the app
   const [booksList, setBooksList] = useState([]);
 
-  //Funtion to fetch the books and pass inside the use effect
+  //Funtion to fetch the books using the useCallback hook to prevent bugs and pass inside the use effect
   const fetchBooks = async () => {
-    const getBooksResponse = await model.getBooksRequest();
-    setBooksList(getBooksResponse.data);
+    const { data } = await model.getBooksRequest();
+    setBooksList(data);
   };
 
   //Creating a function to create a new book from the books array to be passed down as prop -> bookCreate

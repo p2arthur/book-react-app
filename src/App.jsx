@@ -11,7 +11,7 @@ function App() {
   //Use effect to fetch the data from the server when the App component renders => Only renders on load []
   useEffect(() => {
     fetchBooks();
-  }, []);
+  }, [fetchBooks]);
 
   return (
     <div className="app">
