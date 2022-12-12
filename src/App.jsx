@@ -7,11 +7,13 @@ import { useState, useEffect } from "react";
 function App() {
   const [booksList, setBooksList] = useState([]);
 
+  //Funtion to fetch the books and pass inside the use effect
   const fetchBooks = async () => {
     const getBooksResponse = await model.getBooksRequest();
     setBooksList(getBooksResponse.data);
   };
 
+  //Use effect to fetch the data from the server when the App component renders => Only renders on load []
   useEffect(() => {
     fetchBooks();
   }, []);
